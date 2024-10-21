@@ -50,7 +50,9 @@ public class UserServiceImpl {
         if (!passwordEncoder.matches(loginRequest.getPassword(), existingUser.getPassword())) {
             throw new ValidationException("Invalid password");
         }
-        return jwtService.generateToken(existingUser.getEmail());
+
+        MembershipStatus mem= existingUser.getMembershipStatus();
+        return jwtService.generateToken(existingUser.getEmail(), mem);
     }
 
     public List<Member> getAllUsers() {
