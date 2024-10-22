@@ -52,14 +52,12 @@ public class Member implements UserDetails {
     
     @Override
     public boolean isAccountNonLocked() {
-    // Return false if the account is inactive (locks inactive accounts)
-    return this.membershipStatus == MembershipStatus.ACTIVE;
+    return this.membershipStatus == MembershipStatus.ADMIN;
 }
 
     @Override
     public boolean isEnabled() {
-    // Enabled if the membership is ACTIVE
-    return this.membershipStatus == MembershipStatus.ACTIVE;
+    return this.membershipStatus == MembershipStatus.ADMIN;
 }
 
 }

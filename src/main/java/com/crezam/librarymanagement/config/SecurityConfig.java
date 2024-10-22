@@ -4,6 +4,7 @@ import com.crezam.librarymanagement.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -36,16 +37,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                         .requestMatchers("/api/v1/auth/**").permitAll()  // Allow public access to auth endpoints (e.g., login, signup)
-                        .requestMatchers("/api/v1/members/**").hasRole("ACTIVE")  // Only ACTIVE members can access member endpoints
-                        .requestMatchers("/api/v1/books/**").hasRole("ACTIVE")    // Only ACTIVE members can access book endpoints
+                        .requestMatchers(HttpMethod.GET,"/api/v1/members/**").hasRole("ADMIN")  
+                        .requestMatchers(HttpMethod.GET,"/api/v1/books/**").hasRole("ADMIN")   
                         .anyRequest().authenticated() 
                 )
                 .authenticationProvider(authenticationProvider())
+                
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-
-                
-                
+     
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

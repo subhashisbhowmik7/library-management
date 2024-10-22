@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +18,16 @@ public class UserServiceImpl {
 
     @Autowired
     private final MemberRepository userRepository;
-    // @Autowired
+    @Autowired
     private final JwtService jwtService;
-    // @Autowired
-    private final BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(MemberRepository userRepository, JwtService jwtService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
-        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.passwordEncoder= new BCryptPasswordEncoder();
     }
 
     public String registerUser(@Valid Member user) {

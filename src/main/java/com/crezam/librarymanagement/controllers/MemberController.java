@@ -18,39 +18,34 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    // Get all members - Only ACTIVE members can access this
-    @PreAuthorize("hasRole('ACTIVE')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<Member>> getAllMembers() {
         List<Member> members = memberService.getAllMembers();
         return ResponseEntity.ok(members);
     }
 
-    // Get member by ID
-    @PreAuthorize("hasRole('ACTIVE')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
         Member member = memberService.getMemberById(id);
         return ResponseEntity.ok(member);
     }
 
-    // Register new member (no authorization needed)
     @PostMapping
     public ResponseEntity<Member> addMember(@Valid @RequestBody Member member) {
         Member savedMember = memberService.addMember(member);
         return ResponseEntity.ok(savedMember);
     }
 
-    // Update member details - Only ACTIVE members
-    @PreAuthorize("hasRole('ACTIVE')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Member> updateMember(@PathVariable Long id, @Valid @RequestBody Member member) {
         Member updatedMember = memberService.updateMember(id, member);
         return ResponseEntity.ok(updatedMember);
     }
 
-    // Delete a member - Only ACTIVE members
-    @PreAuthorize("hasRole('ACTIVE')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
