@@ -23,7 +23,6 @@ public class UserServiceImpl {
     @Autowired
     private  PasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserServiceImpl(MemberRepository userRepository, JwtService jwtService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;

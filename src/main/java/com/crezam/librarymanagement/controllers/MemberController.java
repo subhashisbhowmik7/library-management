@@ -11,7 +11,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/members")
+@RequestMapping("/api/v1/member")
 public class MemberController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<Member> addMember(@Valid @RequestBody Member member) {
-        Member savedMember = memberService.addMember(member);
+        Member savedMember = memberService.registerMember(member);
         return ResponseEntity.ok(savedMember);
     }
 
