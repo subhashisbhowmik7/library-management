@@ -13,7 +13,6 @@ import com.crezam.librarymanagement.entities.MembershipStatus;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,7 +26,7 @@ public class JwtService {
 
     public String generateToken(String username, MembershipStatus membershipStatus) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("roles", List.of("ROLE_" + membershipStatus));  
+        // claims.put("roles", List.of("ROLE_" + membershipStatus));  
         return createToken(claims, username);
     }
     

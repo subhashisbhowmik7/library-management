@@ -37,7 +37,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                         .requestMatchers("/api/v1/auth/**").permitAll()  // Allow public access to auth endpoints (e.g., login, signup)
-                        .requestMatchers(HttpMethod.GET,"/api/v1/members/**").hasRole("ADMIN")  
+                        .requestMatchers(HttpMethod.GET,"/api/v1/members").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/v1/members").hasRole("ADMIN")  
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/members/**").hasRole("ADMIN")  
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/members/**").hasRole("ADMIN")  
+                        .requestMatchers(HttpMethod.GET,"/api/v1/books").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/v1/books").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/books/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/v1/books/**").hasRole("ADMIN")   
                         .anyRequest().authenticated() 
                 )

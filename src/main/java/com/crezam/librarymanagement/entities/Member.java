@@ -18,6 +18,7 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Getter
 @Setter
+
 public class Member implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +38,7 @@ public class Member implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private MembershipStatus membershipStatus;
+    private MembershipStatus membershipStatus=MembershipStatus.USER;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
