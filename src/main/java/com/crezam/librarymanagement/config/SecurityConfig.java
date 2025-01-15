@@ -36,16 +36,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                        .requestMatchers("/api/v1/auth/**").permitAll()  // Allow public access to auth endpoints (e.g., login, signup)
-                        .requestMatchers(HttpMethod.GET,"/api/v1/members").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,"/api/v1/members").hasRole("ADMIN")  
-                        .requestMatchers(HttpMethod.DELETE,"/api/v1/members/**").hasRole("ADMIN")  
-                        .requestMatchers(HttpMethod.PUT,"/api/v1/members/**").hasRole("ADMIN")  
-                        .requestMatchers(HttpMethod.GET,"/api/v1/books").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,"/api/v1/books").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/api/v1/books/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/api/v1/books/**").hasRole("ADMIN")   
-                        .anyRequest().authenticated() 
+                        .requestMatchers("/api/v1/auth/**").permitAll()  // Public access to auth endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/v1/member").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/member/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/member/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/member/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/member/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+
                 )
                 .authenticationProvider(authenticationProvider())
                 

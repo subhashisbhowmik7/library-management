@@ -1,6 +1,6 @@
 package com.crezam.librarymanagement.entities;
 
-public enum MembershipStatus {
+public enum Role {
     ADMIN,
     USER
 }

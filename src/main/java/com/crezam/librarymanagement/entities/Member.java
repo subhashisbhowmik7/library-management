@@ -38,7 +38,7 @@ public class Member implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private MembershipStatus membershipStatus=MembershipStatus.USER;
+    private Role membershipStatus=Role.USER;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -51,15 +51,34 @@ public class Member implements UserDetails {
         return this.email;
     }
     
-    @Override
-    public boolean isAccountNonLocked() {
-    return this.membershipStatus == MembershipStatus.ADMIN;
+//     @Override
+//     public boolean isAccountNonLocked() {
+//     return this.membershipStatus == MembershipStatus.USER;
+// }
+
+@Override
+public boolean isAccountNonExpired() {
+    return true; // All accounts are non-expired for now.
 }
 
-    @Override
-    public boolean isEnabled() {
-    return this.membershipStatus == MembershipStatus.ADMIN;
+@Override
+public boolean isAccountNonLocked() {
+    return true; // Adjust logic for locked accounts if needed.
 }
+
+@Override
+public boolean isCredentialsNonExpired() {
+    return true; // All credentials are non-expired for now.
+}
+
+@Override
+public boolean isEnabled() {
+    return true; // Adjust logic for account activation if required.
+}
+//     @Override
+//     public boolean isEnabled() {
+//     return this.membershipStatus == MembershipStatus.ADMIN;
+// }
 
 }
 

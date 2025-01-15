@@ -5,6 +5,7 @@ import com.crezam.librarymanagement.entities.Member;
 import com.crezam.librarymanagement.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -18,12 +19,14 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Member>> getAllMembers() {
         List<Member> members = memberService.getAllMembers();
         return ResponseEntity.ok(members);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
         Member member = memberService.getMemberById(id);
         return ResponseEntity.ok(member);
